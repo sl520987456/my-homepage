@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的主页</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/leancloud-storage@4.12.0/dist/av-min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="login-container">
+        <div class="user-profile">
+            <img src="icons/user.svg" alt="用户头像" class="user-icon" width="24" height="24">
+            <span class="username">未登录</span>
+        </div>
+        <div class="submenu login-submenu">
+            <div class="submenu-item" data-action="login">登录</div>
+            <div class="submenu-item" data-action="register">注册</div>
+            <div class="submenu-item" data-action="logout">注销</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="time-section">
+            <div class="time-display">
+                <div class="time">00:00:00</div>
+                <div class="date">2024年01月01日 星期一</div>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <form class="search-form" action="https://www.bing.com/search" method="get" target="_blank">
+                <div class="search-wrapper">
+                    <input type="text" 
+                           name="q" 
+                           class="search-input" 
+                           placeholder="必应搜索..." 
+                           aria-label="搜索"
+                           autocomplete="off">
+                    <button type="submit" class="search-button" aria-label="搜索">
+                        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="countdown-section">
+            <div class="countdown-header">
+                <h2>倒数日</h2>
+                <button type="button" class="set-countdown">设置倒数日</button>
+            </div>
+            <div class="countdown-display">
+                <div class="countdown-timer"></div>
+                <div class="countdown-title"></div>
+            </div>
+            <div class="submenu countdown-submenu">
+                <div class="submenu-item" data-action="edit">编辑倒数日</div>
+                <div class="submenu-item" data-action="delete">删除倒数日</div>
+                <div class="submenu-item" data-action="reset">重置</div>
+            </div>
+        </div>
+
+        <div class="shortcuts-section">
+            <div class="shortcuts-grid">
+                <!-- 快捷方式将通过 JavaScript 动态添加 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 遮罩层 -->
+    <div class="overlay"></div>
+
+    <!-- 登录菜单 -->
+    <div class="login-menu" role="dialog" aria-labelledby="login-dialog-title" aria-modal="true">
+        <div class="menu-header">
+            <h2 id="login-dialog-title" class="menu-title">用户登录</h2>
+        </div>
+        
+        <form class="menu-content" onsubmit="return false;" autocomplete="off" spellcheck="false">
+            <div class="input-group">
+                <label for="username" class="required">账号</label>
+                <input type="text" 
+                       id="username" 
+                       name="username"
+                       placeholder="请输入邮箱或手机号" 
+                       required 
+                       maxlength="50"
+                       autocomplete="off"
+                       autocorrect="off"
+                       spellcheck="false"
+                       data-form-type="other"
+                       aria-required="true"
+                       class="no-auto-caps">
+            </div>
+            
+            <div class="input-group">
+                <label for="password" class="required">密码</label>
+                <input type="password" 
+                       id="password" 
+                       name="password"
+                       placeholder="请输入密码" 
+                       required
+                       maxlength="20"
+                       autocomplete="new-password"
+                       autocorrect="off"
+                       spellcheck="false"
+                       data-form-type="other"
+                       aria-required="true"
+                       class="no-auto-caps">
+            </div>
+            
+            <!-- 隐藏用户名输入框 -->
+            <input type="text" 
+                   class="hidden-input"
+                   name="fakeusernameremembered"
+                   title="自动填充用户名"
+                   placeholder="自动填充用户名"
+                   aria-hidden="true"
+                   tabindex="-1">
+            <input type="password" 
+                   class="hidden-input"
+                   name="fakepasswordremembered"
+                   title="自动填充密码"
+                   placeholder="自动填充密码"
+                   aria-hidden="true"
+                   tabindex="-1">
+            
+            <div class="button-group">
+                <button type="submit" 
+                        id="login-button" 
+                        class="primary-button">
+                    登录
+                </button>
+                <button type="button" 
+                        id="cancel-login" 
+                        class="secondary-button">
+                    取消
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 倒数日设置对话框 -->
+    <div class="countdown-menu" role="dialog" aria-labelledby="countdown-dialog-title" aria-modal="true">
+        <div class="menu-header">
+            <h2 id="countdown-dialog-title" class="menu-title">设置倒数日</h2>
+        </div>
+        
+        <form class="menu-content" onsubmit="return false;">
+            <div class="input-group">
+                <label for="countdown-title" class="required">事件名称</label>
+                <input type="text" 
+                       id="countdown-title" 
+                       name="title"
+                       placeholder="例如：春节" 
+                       required 
+                       maxlength="50"
+                       autocomplete="off"
+                       aria-required="true">
+            </div>
+            
+            <div class="input-group">
+                <label for="countdown-date" class="required">目标日期</label>
+                <input type="date" 
+                       id="countdown-date" 
+                       name="date"
+                       required
+                       autocomplete="off"
+                       aria-required="true">
+            </div>
+            
+            <div class="button-group">
+                <button type="submit" 
+                        id="save-countdown" 
+                        class="primary-button">
+                    保存
+                </button>
+                <button type="button" 
+                        id="cancel-countdown" 
+                        class="secondary-button">
+                    取消
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 错误提示框 -->
+    <div class="error-menu" role="alert">
+        <div class="error-content">
+            <svg class="error-icon" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 11c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4h-2v-2h2v2z"/>
+            </svg>
+            <span class="error-message"></span>
+        </div>
+    </div>
+
+    <!-- 成功提示框 -->
+    <div class="success-menu" role="alert">
+        <div class="success-content">
+            <svg class="success-icon" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            </svg>
+            <span class="success-message"></span>
+        </div>
+    </div>
+
+    <!-- 脚本加载 -->
+    <script src="https://cdn.staticfile.org/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/leancloud-init.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/time.js"></script>
+    <script>
+        // 初始化粒子效果
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80 },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle' },
+                opacity: {
+                    value: 0.5,
+                    random: false
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ffffff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

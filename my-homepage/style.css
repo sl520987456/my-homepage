@@ -1,0 +1,1134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: #1a1a1a;
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #1a1a1a;
+}
+
+.main-container {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.login-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-container:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.time-section {
+    text-align: center;
+    margin: 3rem auto 4rem;
+    padding: 2rem;
+    max-width: 600px;
+    transition: all 0.3s ease;
+}
+
+.time-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.time-display {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.time {
+    font-size: 5rem;
+    font-weight: 300;
+    color: white;
+    text-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: 6px;
+    line-height: 1.2;
+    transition: all 0.3s ease;
+}
+
+.time:hover {
+    text-shadow: 0 0 35px rgba(255, 255, 255, 0.6);
+    transform: scale(1.02);
+    letter-spacing: 8px;
+}
+
+.date {
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    padding: 1rem 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.date::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.date:hover {
+    color: white;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.date:hover::after {
+    width: 150px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .time-section {
+        margin: 2rem auto 3rem;
+        padding: 1.5rem;
+    }
+
+    .time {
+        font-size: 4rem;
+        letter-spacing: 4px;
+    }
+
+    .time:hover {
+        letter-spacing: 5px;
+    }
+
+    .date {
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+    }
+}
+
+.search-section {
+    margin: 0 auto;
+    max-width: 600px;
+    width: 90%;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.search-wrapper:hover,
+.search-wrapper:focus-within {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.search-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+.search-button {
+    padding: 0.8rem 1.2rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+.shortcuts-section {
+    margin: 2rem auto;
+    max-width: 1200px;
+    width: 90%;
+    z-index: 2;
+    position: relative;
+}
+
+.shortcuts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+.shortcut-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: white;
+}
+
+.shortcut-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+.shortcut-item span {
+    font-size: 0.9rem;
+    text-align: center;
+    word-break: break-word;
+}
+
+.shortcut-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.add-shortcut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 100px;
+}
+
+.add-shortcut:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .current-time {
+        font-size: 3rem;
+    }
+
+    .current-date {
+        font-size: 1.2rem;
+    }
+
+    .search-section,
+    .countdown-section {
+        width: 95%;
+        margin: 1.5rem auto;
+    }
+
+    .shortcuts-grid {
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
+
+/* 二级菜单基础样式 */
+.submenu {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.15);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    min-width: 120px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+/* 登录二级菜单样式 */
+.login-submenu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background: rgba(30, 30, 30, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    min-width: 120px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.login-container:hover .login-submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.login-submenu .submenu-item {
+    padding: 0.8rem 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.login-submenu .submenu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.login-submenu .submenu-item[data-action="logout"] {
+    color: #ff4444;
+}
+
+.login-submenu .submenu-item[data-action="logout"]:hover {
+    background: rgba(255, 68, 68, 0.1);
+}
+
+/* 快捷方式二级菜单位置 */
+.shortcut-submenu {
+    display: none;
+    position: fixed;
+}
+
+/* 倒数日二级菜单位置 */
+.countdown-submenu {
+    position: fixed;
+    background: rgba(30, 30, 30, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 4px 0;
+    min-width: 150px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.countdown-submenu .submenu-item {
+    padding: 10px 16px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.countdown-submenu .submenu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.countdown-submenu .submenu-item[data-action="delete"] {
+    color: #ff4444;
+}
+
+.countdown-submenu .submenu-item[data-action="delete"]:hover {
+    background: rgba(255, 68, 68, 0.1);
+}
+
+/* 添加菜单动画 */
+@keyframes menuFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.countdown-submenu.active {
+    animation: menuFadeIn 0.2s ease forwards;
+}
+
+/* 二级菜单项样式 */
+.submenu-item {
+    padding: 0.8rem 1.2rem;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+.submenu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 显示二级菜单 */
+.show-submenu .submenu {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 倒数日部分样式优化 */
+.countdown-section {
+    max-width: 600px;
+    margin: 0 auto;
+    width: 90%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.countdown-section:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+}
+
+.countdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.8rem;
+}
+
+.countdown-header h2 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: white;
+    margin: 0;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.countdown-display {
+    text-align: center;
+    padding: 0.8rem;
+    position: relative;
+}
+
+.countdown-timer {
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 1rem 0;
+    color: white;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    letter-spacing: 1px;
+}
+
+.countdown-title {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 0.8rem;
+    font-weight: 400;
+}
+
+.set-countdown {
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.set-countdown:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .countdown-section {
+        margin: 1.5rem 1rem;
+        padding: 1rem;
+    }
+
+    .countdown-timer {
+        font-size: 2rem;
+    }
+
+    .countdown-title {
+        font-size: 1rem;
+    }
+
+    .set-countdown {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 倒数日设置菜单样式 */
+.countdown-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 30, 30, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 400px;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.countdown-menu.active {
+    opacity: 1;
+}
+
+.countdown-menu .menu-header {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.countdown-menu .menu-title {
+    color: white;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.countdown-menu .menu-content {
+    padding: 1.5rem;
+}
+
+.countdown-menu .input-group {
+    margin-bottom: 1.5rem;
+}
+
+.countdown-menu .input-group label {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.countdown-menu .input-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.countdown-menu .input-group input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.countdown-menu .button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.countdown-menu .button-group button {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.countdown-menu .primary-button {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+}
+
+.countdown-menu .primary-button:hover {
+    background: white;
+    transform: translateY(-1px);
+}
+
+.countdown-menu .secondary-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.countdown-menu .secondary-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* 登录菜单样式 */
+.login-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 30, 30, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 400px;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.login-menu.active {
+    opacity: 1;
+}
+
+.login-menu .menu-header {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-menu .menu-title {
+    color: white;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.login-menu .menu-content {
+    padding: 1.5rem;
+}
+
+.login-menu .input-group {
+    margin-bottom: 1.5rem;
+}
+
+.login-menu .input-group label {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.login-menu .input-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.login-menu .input-group input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.login-menu .button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.login-menu .button-group button {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-menu .primary-button {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+}
+
+.login-menu .primary-button:hover {
+    background: white;
+    transform: translateY(-1px);
+}
+
+.login-menu .secondary-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.login-menu .secondary-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* 添加快捷方式的二级菜单样式 */
+.add-shortcut-submenu {
+    position: fixed;
+    background: rgba(30, 30, 30, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0;
+    min-width: 300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.add-shortcut-submenu .submenu-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.add-shortcut-submenu h3 {
+    margin: 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.add-shortcut-submenu .submenu-form {
+    padding: 16px;
+}
+
+.add-shortcut-submenu .input-group {
+    margin-bottom: 12px;
+}
+
+.add-shortcut-submenu .input-group label {
+    display: block;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 4px;
+}
+
+.add-shortcut-submenu .input-group input {
+    width: 100%;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    font-size: 13px;
+}
+
+.add-shortcut-submenu .input-group input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.add-shortcut-submenu .button-group {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.add-shortcut-submenu .button-group button {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-shortcut-submenu .button-group button[type="submit"] {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+}
+
+.add-shortcut-submenu .button-group button[type="button"] {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.add-shortcut-submenu .button-group button:hover {
+    transform: translateY(-1px);
+}
+
+/* 错误提示框样式 */
+.error-menu {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 59, 48, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    z-index: 1100;
+    box-shadow: 0 4px 20px rgba(255, 59, 48, 0.3);
+    display: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.error-menu.active {
+    display: block;
+    opacity: 1;
+}
+
+.error-content {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.error-icon {
+    color: white;
+    flex-shrink: 0;
+}
+
+.error-message {
+    color: white;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* 添加隐藏动画 */
+.error-menu.hiding {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+}
+
+/* 快捷方式右键菜单样式 */
+.shortcut-context-menu {
+    position: fixed;
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 4px 0;
+    min-width: 120px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1100;
+    display: none;
+}
+
+.shortcut-context-menu .submenu-item {
+    padding: 8px 16px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.shortcut-context-menu .submenu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.shortcut-context-menu .submenu-item[data-action="delete"] {
+    color: #ff4444;
+}
+
+.shortcut-context-menu .submenu-item[data-action="delete"]:hover {
+    background: rgba(255, 68, 68, 0.1);
+}
+
+/* 成功提示框样式 */
+.success-menu {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(52, 199, 89, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    z-index: 1100;
+    box-shadow: 0 4px 20px rgba(52, 199, 89, 0.3);
+    display: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.success-menu.active {
+    display: block;
+    opacity: 1;
+}
+
+.success-content {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.success-icon {
+    color: white;
+    flex-shrink: 0;
+}
+
+.success-message {
+    color: white;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* 添加隐藏动画 */
+.success-menu.hiding {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+}
+
+/* 确认对话框样式 */
+.confirm-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1200;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.confirm-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.confirm-content {
+    background: rgba(30, 30, 30, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    max-width: 90%;
+    width: 320px;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.confirm-menu.active .confirm-content {
+    transform: scale(1);
+}
+
+.confirm-message {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.confirm-menu .button-group {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.confirm-menu button {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.confirm-menu .confirm-button {
+    background: #ff4444;
+    color: white;
+}
+
+.confirm-menu .confirm-button:hover {
+    background: #ff5555;
+    transform: translateY(-1px);
+}
+
+.confirm-menu .cancel-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.confirm-menu .cancel-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* 隐藏的输入框样式 */
+.hidden-input {
+    display: none;
+}
+
+/* 禁用自动大写 */
+.no-auto-caps {
+    text-transform: none;
+}
+
+/* 添加快捷方式菜单样式 */
+.shortcut-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 30, 30, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 400px;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.shortcut-menu.active {
+    opacity: 1;
+}
+
+.shortcut-menu .menu-content {
+    padding: 1.5rem;
+}
+
+.shortcut-menu .input-group {
+    margin-bottom: 1.5rem;
+}
+
+.shortcut-menu .input-group label {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.shortcut-menu .input-group input {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.shortcut-menu .button-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.shortcut-menu button {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.shortcut-menu #save-shortcut {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+}
+
+.shortcut-menu #cancel-shortcut {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+  

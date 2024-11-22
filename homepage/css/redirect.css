@@ -1,0 +1,15 @@
+.redirect-message {
+    text-align: center;
+    margin-top: 20px;
+    font-family: sans-serif;
+    color: #333;
+}
+
+.redirect-link {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.redirect-link:hover {
+    text-decoration: underline;
+} 
